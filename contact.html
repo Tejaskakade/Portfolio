@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact Me</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f7fc;
+            padding: 50px 0;
+        }
+        
+        .contact-form-container {
+            background-color: #ffffff;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            color: #ffbd39;
+        }
+        
+        .contact-form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-form-container .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .contact-form-container input,
+        .contact-form-container textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            resize: none;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .contact-form-container input:focus,
+        .contact-form-container textarea:focus {
+            border-color: #ffbd39;
+            outline: none;
+            box-shadow: 0 0 5px #ffbd39;
+        }
+        
+        .contact-form-container input::placeholder,
+        .contact-form-container textarea::placeholder {
+            color: #aaa;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .contact-form-container input:focus::placeholder,
+        .contact-form-container textarea:focus::placeholder {
+            opacity: 1;
+            color: #999;
+        }
+        
+        .contact-form-container button {
+            padding: 15px;
+            background-color: #dd9e20;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form-container button:hover {
+            background-color: #ffbd39;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .contact-form-container {
+                padding: 25px;
+            }
+            .contact-form-container h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="contact-form-container">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+
+            <!-- Loading spinner/message -->
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Submitting your message...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+        })();
+
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Show loading indicator
+            document.getElementById('loading').style.display = "block";
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function(response) {
+                    // Hide loading indicator
+                    document.getElementById('loading').style.display = "none";
+                    alert('Message sent successfully!');
+                    // Optionally redirect to a thank-you page or clear the form
+                    document.getElementById('contact-form').reset(); // Clear form after submission
+                }, function(error) {
+                    // Hide loading indicator
+                    document.getElementById('loading').style.display = "none";
+                    alert('Error sending message: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+
+</body>
+
+</html>
