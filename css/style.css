@@ -11340,7 +11340,7 @@ h5,
 
 .owl-carousel.home-slider {
     position: relative;
-    height: 750px;
+    height: 800px;
     z-index: 0;
 }
 
@@ -11372,6 +11372,8 @@ h5,
 .owl-carousel.home-slider .slider-item .slider-text {
     height: 750px;
     z-index: 0;
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 991.98px) {
@@ -12260,13 +12262,13 @@ textarea.form-control {
 }
 
 .ftco-section {
-    padding: 6em 0;
+    padding: 4em 0;
     position: relative;
 }
 
 @media (max-width: 767.98px) {
     .ftco-section {
-        padding: 6em 0;
+        padding: 4em 0;
     }
 }
 
@@ -12456,7 +12458,7 @@ textarea.form-control {
 
 .heading-section h1.big {
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 0;
     font-size: 7vw;
     color: rgba(255, 255, 255, 0.1);
